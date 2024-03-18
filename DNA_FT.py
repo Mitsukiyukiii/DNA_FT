@@ -31,12 +31,26 @@ def fourier_genome(seq):
     return(xhat,[float(i)/len(xhat) for i in range(0,len(xhat))])
 
 
-def P(spectrum):
+"""def P(spectrum):
     x=len(spectrum)
     k=int(min(x/3,50))
     peak=max(spectrum[int(x/3)-k:int(x/3)+k])
     p=x*peak/sum(spectrum)
     return(p)
+"""
+
+def P(spectrum):
+    total = sum(spectrum)
+    if total == 0:
+        # Handle the division by zero case, for example, by returning a default value or raising an error
+        print("Warning: The sum of the spectrum is zero. Returning zero for P.")
+        return 0  # or another appropriate value or action
+
+    x = len(spectrum)
+    k = int(min(x / 3, 50))
+    peak = max(spectrum[int(x / 3) - k:int(x / 3) + k])
+    p = x * peak / total
+    return p
 
 
 def main(inputfile, outputdir):
